@@ -1,0 +1,35 @@
+.alphabet{
+    font-size: 2rem;
+    background-color: darkblue;
+    color: white;
+    border-radius: 10%;
+}
+
+.alphabet:hover{
+    background-color: blue
+}
+
+canvas{
+    border: 3px solid black;
+}
+
+.inword{
+    font-size: 2rem;
+    /* border: 1px solid red; */
+    /* display: inline-block; */
+    margin: 0%;
+    padding-bottom: 10px;
+}
+
+#mylives{
+    font-size: 1.5rem;
+}
+
+body{
+    background-color:lightcyan;
+}
+
+.wrapper{
+    text-align: center;
+}
+
