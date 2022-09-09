@@ -1,16 +1,17 @@
 let myStickman = document.getElementById("stickman");
 let $showlives = document.getElementById("mylives");
 let $showword = document.getElementById("word");
-let str = 'apple,banana,remember,forever,google,love,special,internet,youtube,family,together,octopus,information,friend,music';
+let str = 'apple,banana,remember,forever,google,love,special,internet,youtube,family,together,octopus,information,friend,music,culture,experience,education,symbol,effect,liberty,affair,comfort,tradition,subject,object,source,revolution,pollution,system,triumph,respect,communication,foundation,glory,situation,competition,prairie,effort,section,';
 let word = str.split(',');
 let guess;
 let guesses = [ ];
+let wrong_letters = [ ];
 let counter = 0;
 let lives = 10;
 let context = myStickman.getContext('2d');
 let drawArray = [ ];
 
-const random_index = Math.floor(Math.random()*15);
+const random_index = Math.floor(Math.random()*(39-0)+1);
 // let $inword = document.createElement('p');
 // $inword.className = 'inword';
 // $inword.innerText = word[random_index];
@@ -25,49 +26,54 @@ for(let i=0;i<answer.length;i++){
     $inword.innerText += string[i];
 }
 $showword.appendChild($inword);
-// let check = 0;
-// $inword.innerHTML = "";
-// for(let i=0;i<answer.length;i++){
-//     if(counter == 0 && check == 0){
-//         $inword.innerHTML += "a";
-//         check = 1;
-//         continue;
-//     }
-//     $inword.innerHTML += "ㅡ";
-// }
-//console.log(answer);
+console.log(answer);
+
+for(let i=0;i<answer.length;i++){
+    guesses.push(0);
+}
+
+for(let i=0;i<26;i++){
+    wrong_letters.push(0);
+    // console.log(wrong_letters[i]);
+}
 
 function onClickAlphabet(event){
     //console.log(event.target.innerText);
-    let num = [ ];
+    let num = null;
     let check = 0;
     guess = event.target.innerText;
+    let num_guess = guess.charCodeAt(0);
     const alphabet = document.getElementById(guess);
     alphabet.style.backgroundColor = "blue";
 
     for(let i=0;i<answer.length;i++){
-        for(let j=0;j<guesses.length;j++){
-            // 중복 막기
-            if(guesses[j] == guess){
-                check = 2;
-                break;
-            }
-        }
-        if(check == 2){
-            break;
-        }
-        if(answer[i] == guess){
+        
+        if(answer[i] == guess && guesses[i] == 0){
             counter++;
             string[i] = guess + " ";
-            guesses.push(guess);
+            guesses[i] = 1;
             check = 1;
             // console.log(counter);
         }
     }
 
-    if(check == 2){
-        check = 1;
+    for(let i=0;i<answer.length;i++){
+        if(answer[i] == guess && guesses[i] == 1){
+            check = 1;
+            break;
+        }
     }
+
+    for(let i=0;i<answer.length;i++){
+        if(answer[i] != guess && wrong_letters[num_guess-97] == 1){
+            check = 1;
+            break;
+        }
+    }
+    
+    // if(guess == String.fromCharCode(num_guess)){
+    //     console.log(55555);
+    // }
     
     if(check == 1){
         $inword.innerHTML = "";
@@ -83,6 +89,9 @@ function onClickAlphabet(event){
     }
     else if(check == 0){
         lives--;
+        
+        wrong_letters[num_guess-97] = 1;
+        // console.log(num_guess-97);
         if(lives == 0){
             $showlives.innerHTML = "GAME OVER!";
             setTimeout(function(){
