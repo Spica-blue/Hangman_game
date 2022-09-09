@@ -26,7 +26,7 @@ for(let i=0;i<answer.length;i++){
     $inword.innerText += string[i];
 }
 $showword.appendChild($inword);
-console.log(answer);
+// console.log(answer);
 
 for(let i=0;i<answer.length;i++){
     guesses.push(0);
