@@ -95,7 +95,7 @@ function onClickAlphabet(event){
         if(lives == 0){
             $showlives.innerHTML = "GAME OVER!";
             setTimeout(function(){
-                alert("GAME OVER!");
+                alert("GAME OVER!" + " 정답은 " + answer);
                 document.location.reload();
             }, 100);
             
